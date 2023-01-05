@@ -1,8 +1,26 @@
+import { useReducer } from 'react';
+import { BiPlus } from 'react-icons/bi';
+
+const formReducer = (state, event) => {
+	return {
+		...state,
+		[event.target.name]: event.target.value,
+	};
+};
+
 export default function Form() {
+	const [formData, setFormData] = useReducer(formReducer, {});
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		console.log(formData);
+	};
+
 	return (
-		<form className='grid lg:grid-cols-2 w-4/6 gap-4 '>
+		<form className='grid lg:grid-cols-2 w-4/6 gap-4 ' onSubmit={handleSubmit}>
 			<div className='input-type'>
 				<input
+					onChange={setFormData}
 					type='text'
 					name='firstname'
 					className='border w-full px-5 py-3 focus:outline-none rounded-md'
@@ -11,6 +29,7 @@ export default function Form() {
 			</div>
 			<div className='input-type'>
 				<input
+					onChange={setFormData}
 					type='text'
 					name='lastname'
 					className='border w-full px-5 py-3 focus:outline-none rounded-md'
@@ -19,6 +38,7 @@ export default function Form() {
 			</div>
 			<div className='input-type'>
 				<input
+					onChange={setFormData}
 					type='text'
 					name='email'
 					className='border w-full px-5 py-3 focus:outline-none rounded-md'
@@ -27,6 +47,7 @@ export default function Form() {
 			</div>
 			<div className='input-type'>
 				<input
+					onChange={setFormData}
 					type='text'
 					name='salary'
 					className='border w-full px-5 py-3 focus:outline-none rounded-md'
@@ -35,6 +56,7 @@ export default function Form() {
 			</div>
 			<div className='input-type'>
 				<input
+					onChange={setFormData}
 					type='date'
 					name='date'
 					className='border px-5 py-3 focus:outline-none rounded-md '
@@ -44,6 +66,7 @@ export default function Form() {
 			<div className='flex gap-10 items-center'>
 				<div className='form-check'>
 					<input
+						onChange={setFormData}
 						type='radio'
 						name='status'
 						value='Active'
@@ -56,6 +79,7 @@ export default function Form() {
 				</div>
 				<div className='form-check'>
 					<input
+						onChange={setFormData}
 						type='radio'
 						name='status'
 						value='Inactive'
@@ -69,6 +93,9 @@ export default function Form() {
 			</div>
 			<button className='flex justify-center text-md w-2/6 bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50  hover:border-green-500 hover:text-green-500'>
 				Add
+				<span className='px-1'>
+					<BiPlus size={24}></BiPlus>
+				</span>
 			</button>
 		</form>
 	);
